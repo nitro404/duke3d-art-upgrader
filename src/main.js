@@ -15,8 +15,7 @@ const NEW_TILES_DIRECTORY = "sprites";
 const groupFilePaths = {
 	regular: "E:\\Game Stuff\\Duke Nukem 3D\\Official Duke Nukem Files\\Duke Nukem 3D\\DN3DINST\\DUKE3D.GRP",
 	atomic: "E:\\Game Stuff\\Duke Nukem 3D\\Official Duke Nukem Files\\Duke Nukem 3D Atomic Edition\\ATOMINST\\DUKE3D.GRP",
-	//mod: "E:\\Game Stuff\\Duke Nukem 3D\\Modifications\\Total Conversions\\Quest for Hussein\\Mod Manager Files\\Regular Version (Native)\\HUSSEIN.GRP"
-	mod: "E:\\Game Stuff\\Duke Nukem 3D\\Modifications\\Total Conversions\\Quest for Al-Qaeda\\Mod Manager Files\\Regular Version (Native)\\ALQAEDA.GRP"
+	mod: "E:\\Game Stuff\\Duke Nukem 3D\\Modifications\\Total Conversions\\Duke Trek 3D\\Beta 1.3\\Mod Manager Files\\Regular Version (Native)\\DTREK13.GRP"
 };
 
 async.waterfall(
@@ -104,7 +103,7 @@ async.waterfall(
 				const modArtFile = artFileCollections.mod[i];
 
 				for(let j = 0; j < artFileCollections.regular.length; j++) {
-					const regularArtFile = artFileCollections.regular[i];
+					const regularArtFile = artFileCollections.regular[j];
 
 					if(modArtFile.localTileStart === regularArtFile.localTileStart) {
 						foundRegularArtFile = true;
@@ -175,12 +174,15 @@ async.waterfall(
 
 						break;
 					}
+				}
 
-					if(!foundRegularArtFile) {
-						console.warn(`Could not find matching regular art file for '${modArtFile.filePath}'! Copying art file as-is.`);
+				if(!foundRegularArtFile) {
+					console.warn(`Could not find matching regular art file for '${modArtFile.filePath}'! Copying art file as-is.`);
 
-						upgradedArtFiles.push(modArtFile);
-					}
+					upgradedArtFiles.push(modArtFile);
+					newTiles.push(...modArtFile.tiles.filter(function(modTile) {
+						return !modTile.isEmpty();
+					}));
 				}
 			}
 
