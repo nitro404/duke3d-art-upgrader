@@ -4,10 +4,10 @@ const async = require("async");
 const utilities = require("extra-utilities");
 const fs = require("fs-extra");
 const Group = require("duke3d-group");
-//const Art = require("duke3d-art");
-const Art = require("../../../Node.js/Duke3D Art/index.js");
 //const Palette = require("duke3d-palette");
 const Palette = require("../../../Node.js/Duke3D Palette/index.js");
+//const Art = require("duke3d-art");
+const Art = require("../../../Node.js/Duke3D Art/index.js");
 
 const UPGRADED_ART_DIRECTORY = "upgraded";
 const NEW_TILES_DIRECTORY = "sprites";
@@ -15,7 +15,8 @@ const NEW_TILES_DIRECTORY = "sprites";
 const groupFilePaths = {
 	regular: "E:\\Game Stuff\\Duke Nukem 3D\\Official Duke Nukem Files\\Duke Nukem 3D\\DN3DINST\\DUKE3D.GRP",
 	atomic: "E:\\Game Stuff\\Duke Nukem 3D\\Official Duke Nukem Files\\Duke Nukem 3D Atomic Edition\\ATOMINST\\DUKE3D.GRP",
-	mod: "E:\\Game Stuff\\Duke Nukem 3D\\Modifications\\Total Conversions\\Quest for Hussein\\Mod Manager Files\\Regular Version (Native)\\HUSSEIN.GRP"
+	//mod: "E:\\Game Stuff\\Duke Nukem 3D\\Modifications\\Total Conversions\\Quest for Hussein\\Mod Manager Files\\Regular Version (Native)\\HUSSEIN.GRP"
+	mod: "E:\\Game Stuff\\Duke Nukem 3D\\Modifications\\Total Conversions\\Quest for Al-Qaeda\\Mod Manager Files\\Regular Version (Native)\\ALQAEDA.GRP"
 };
 
 async.waterfall(
@@ -192,7 +193,6 @@ async.waterfall(
 
 			const newTilesDirectoryStats = null;
 
-
 			try {
 				newTilesDirectoryStats = fs.statSync(NEW_TILES_DIRECTORY);
 			}
@@ -225,20 +225,20 @@ async.waterfall(
 
 			console.log("Writing new tiles...");
 
-return callback();
-
-			async.eachSeries(
+			return async.eachSeries(
 				newTiles,
 				function(newTile, callback) {
 					return newTile.writeTo(
-						NEW_TILES_DIRECTORY,
+						NEW_TILES_DIRECTORY + "/",
 						true,
-						TODO_PALETTE,
+						paletteFiles.mod.palette ? paletteFiles.mod.palette : paletteFiles.regular.palette,
 						"PNG",
 						function(error, filePath) {
 							if(error) {
 								return callback(error);
 							}
+
+							console.log(`Saved tile to: '${filePath}'.`)
 
 							return callback();
 						}
@@ -246,10 +246,10 @@ return callback();
 				},
 				function(error) {
 					if(error) {
-						return console.error(error);
+						return callback(error);
 					}
 
-					console.log("Done!");
+					return callback();
 				}
 			);
 		}
