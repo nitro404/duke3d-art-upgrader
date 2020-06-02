@@ -1,0 +1,13 @@
+node_modules
+bower_components
+test
+coverage
+.nyc_output
+.sass-cache
+.coveralls.yml
+.travis.yml
+package-lock.json
+yarn.lock
+gulpfile.js
+LICENSE
+CHANGELOG.md

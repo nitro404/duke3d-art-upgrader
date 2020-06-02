@@ -1,0 +1,43 @@
+{
+  "name": "duke3d-art-upgrader",
+  "version": "0.0.1",
+  "description": "A tool for upgrading Duke Nukem 3D ART files from 1.3D to 1.4/1.5 Atomic Edition.",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "duke3d",
+    "duke",
+    "nukem",
+    "3d",
+    "art",
+    "upgrader",
+    "atomic",
+    "edition",
+    "plutonium",
+    "pak"
+  ],
+  "author": "Kevin Scroggins",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^3.2.0",
+    "chalk": "^4.0.0",
+    "colors": "^1.4.0",
+    "colour-rgba": "^1.0.4",
+    "duke3d-art": "0.0.3",
+    "duke3d-group": "^1.0.2",
+    "duke3d-palette": "0.0.1",
+    "extended-math": "^1.0.8",
+    "extra-utilities": "^1.3.6",
+    "file-utilities": "^1.0.6",
+    "fs-extra": "^9.0.0",
+    "glob": "^7.1.6",
+    "image-utilities": "^1.0.6",
+    "jimp": "^0.12.1",
+    "json-format": "^1.0.1",
+    "md5-file": "^5.0.0",
+    "path-extra": "^4.3.0",
+    "yargs": "^15.3.1"
+  }
+}
