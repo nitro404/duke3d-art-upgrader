@@ -12,6 +12,9 @@ const Art = require("../../../Node.js/Duke3D Art/index.js");
 const UPGRADED_ART_DIRECTORY = "upgraded";
 const NEW_TILES_DIRECTORY = "sprites";
 
+const removeExpander = false;
+const removeAtomicEditionLogo = false;
+
 const groupFilePaths = {
 	regular: "E:\\Game Stuff\\Duke Nukem 3D\\Official Duke Nukem Files\\Duke Nukem 3D\\DN3DINST\\DUKE3D.GRP",
 	atomic: "E:\\Game Stuff\\Duke Nukem 3D\\Official Duke Nukem Files\\Duke Nukem 3D Atomic Edition\\ATOMINST\\DUKE3D.GRP",
@@ -119,6 +122,22 @@ async.waterfall(
 
 								const upgradedArtFile = atomicArtFile.clone();
 								const artFileComparison = modArtFile.compareTo(regularArtFile);
+
+								if(upgradedArtFile.number === 9) {
+									if(removeAtomicEditionLogo) {
+										console.log("Removing Atomic Edition logo sprites...");
+
+										upgradedArtFile.clearTile(2502);
+										upgradedArtFile.clearTile(2503);
+									}
+
+									if(removeExpander) {
+										console.log("Removing expander weapon sprites...");
+
+										upgradedArtFile.clearTile(2554);
+										upgradedArtFile.clearTile(2555);
+									}
+								}
 
 								if(artFileComparison.removed.length !== 0) {
 									console.log(`Removing ${artFileComparison.removed.length} cleared tiles...`);
