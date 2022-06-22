@@ -21,7 +21,7 @@
   "author": "Kevin Scroggins",
   "license": "MIT",
   "dependencies": {
-    "async": "^3.2.0",
+    "async": "^3.2.2",
     "chalk": "^4.0.0",
     "colors": "^1.4.0",
     "colour-rgba": "^1.0.4",
